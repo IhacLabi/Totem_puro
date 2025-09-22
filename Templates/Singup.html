@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <title>Controle de Acesso</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@700&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #f7e79b 0%, #a08b00 100%);
+      font-family: 'Segoe UI', Arial, sans-serif;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .main-container {
+      width: 1024px;
+      height: 1440px;
+      background: #F4E600;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      padding: 30px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+    }
+
+    .bg-top, .bg-bottom {
+      position: absolute;
+      width: 500px;
+      height: auto;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.7;
+    }
+
+    .bg-top {
+      top: 0;
+      left: 0;
+    }
+
+    .bg-bottom {
+      bottom: 0;
+      right: 0;
+    }
+
+    .status-message {
+      width: 950px;
+      height: 170px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.25);
+      border-radius: 20px;
+      margin-top: 20px;
+      margin-bottom: 30px;
+      z-index: 1;
+    }
+
+    .aproxime {
+      font-size: 2.5rem;
+      color: #000;
+      font-weight: bold;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+      transition: opacity 1s ease;
+      opacity: 1;
+    }
+
+    .aproxime.fade-out {
+      opacity: 0;
+    }
+
+    .profile-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex-grow: 1;
+      z-index: 1;
+    }
+
+    .avatar {
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      border: 8px solid #ddd;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      margin-bottom: 30px;
+      background: url('/Imagens/Logo-sem-Texto-preta.png') center center / contain no-repeat;
+      background-color: #23a49b;
+    }
+
+    .user-info {
+      color: #000;
+      margin-bottom: 30px;
+      text-align: center;
+    }
+
+    .user-name {
+      font-size: 2.2rem;
+      font-weight: 700;
+      margin-bottom: 15px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .user-description {
+      font-size: 1.5rem;
+      background: rgba(255, 255, 255, 0.2);
+      padding: 12px 30px;
+      border-radius: 25px;
+      margin-bottom: 20px;
+    }
+
+    .user-message {
+      font-size: 1.8rem;
+      line-height: 1.4;
+      max-width: 600px;
+      margin: 0 auto 15px;
+    }
+
+    .rfid-box {
+      width: 802px;
+      height: 268px;
+      background: black;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 10px;
+      font-size: 64px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      text-transform: uppercase;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .controls {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 270px;
+      margin-top: 20px;
+      margin-bottom: 20px;
+      z-index: 1;
+    }
+
+    .control-btn {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      border: none;
+      color: white;
+      font-size: 5rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      user-select: none;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+    }
+
+    .botao-esquerda {
+      background: linear-gradient(145deg, #f08334, #c05a0c);
+      box-shadow: 0 6px 12px #c05a0c;
+    }
+
+    .botao-esquerda:hover {
+      box-shadow: 0 10px 20px #c05a0c;
+      filter: brightness(1.1);
+      transform: scale(1.1);
+    }
+
+    .botao-esquerda:active {
+      box-shadow: 0 4px 8px #c05a0c;
+      filter: brightness(0.9);
+      transform: scale(0.95);
+    }
+
+    .botao-direita {
+      background: linear-gradient(145deg, #7fbc4d, #4e7430);
+      box-shadow: 0 6px 12px #4e7430;
+    }
+
+    .botao-direita:hover {
+      box-shadow: 0 10px 20px #4e7430;
+      filter: brightness(1.1);
+      transform: scale(1.1);
+    }
+
+    .botao-direita:active {
+      box-shadow: 0 4px 8px #4e7430;
+      filter: brightness(0.9);
+      transform: scale(0.95);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="main-container">
+
+    <!-- Imagens decorativas dentro do frame -->
+    <img src="/Imagens/Group 2.png" alt="Decor Top" class="bg-top">
+    <img src="/Imagens/Group 3.png" alt="Decor Bottom" class="bg-bottom">
+
+    <div class="status-message">
+      <div class="aproxime" id="mensagem">Aproxime o seu cartão cadastrado</div>
+    </div>
+
+    <div class="profile-section">
+      <div class="avatar"></div>
+      <div class="user-info">
+        <h1 class="user-name">Nome do Usuário</h1>
+        <div class="user-description">Cargo/Função</div>
+        <p class="user-message">Bem-vindo ao sistema de controle de acesso</p>
+        <div class="rfid-box">Aproxime o seu cartão RFID</div>
+      </div>
+    </div>
+
+    <div class="controls">
+      <button class="control-btn botao-esquerda">&#9664;</button>
+      <button class="control-btn botao-direita">&#9654;</button>
+    </div>
+
+  </div>
+
+  <script>
+    const mensagens = [
+      "APROXIME O SEU CARTÃO CADASTRADO",
+      "IHAC LAB-I",
+      "ESPAÇO ABERTO DE CRIAÇÃO E INOVAÇÃO"
+    ];
+    let index = 0;
+    const mensagemEl = document.getElementById("mensagem");
+
+    setInterval(() => {
+      mensagemEl.classList.add("fade-out");
+      setTimeout(() => {
+        index = (index + 1) % mensagens.length;
+        mensagemEl.textContent = mensagens[index];
+        mensagemEl.classList.remove("fade-out");
+      }, 1000);
+    }, 5000);
+  </script>
+</body>
+</html>

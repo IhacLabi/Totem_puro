@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <title>Acesse os Projetos</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f8f8f8;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      width: 1024px;
+      height: 1440px;
+      background: #F4E600;
+      border: 1px solid #ddd;
+      position: relative;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+    }
+
+    /* === Imagens de fundo === */
+    .imagem-superior-esquerda,
+    .imagem-inferior-direita {
+      position: absolute;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.3;
+    }
+
+    .imagem-superior-esquerda {
+      opacity: 0.9;
+      top: -80px;
+      left: -100px;
+      width: 700px;
+      height: auto;
+    }
+
+    .imagem-inferior-direita {
+      opacity: 0.9;
+      bottom: -80px;
+      right: -90px;
+      width: 700px;
+      height: auto;
+    }
+
+    .header {
+      position: absolute;
+      top: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 950px;
+      height: 170px;
+      background: #06426A;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 12px;
+      z-index: 2;
+    }
+
+    .header h2 {
+      color: #ffffff;
+      font-size: 64px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .retangulo-esquerda {
+      width: 435px;
+      height: 817px;
+      background: #007DBC;
+      position: absolute;
+      left: 57.01px;
+      top: 336px;
+      padding: 30px;
+      border-radius: 16px;
+      z-index: 2;
+    }
+
+    .retangulo-direita {
+      width: 383px;
+      height: 446px;
+      background: #007DBC;
+      position: absolute;
+      left: 540.01px;
+      top: 495px;
+      padding: 30px;
+      border-radius: 16px;
+      z-index: 2;
+    }
+
+    .retangulo-esquerda ul,
+    .retangulo-direita ul {
+      list-style: none;
+    }
+
+    .retangulo-esquerda li {
+      font-weight: 400;
+      font-size: 64px;
+      color: white;
+      margin: 20px 0;
+    }
+
+    .retangulo-direita li {
+      font-weight: 300;
+      font-size: 48px;
+      color: white;
+      margin: 16px 0;
+    }
+
+    svg.linha-conexao {
+      position: absolute;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .botoes-navegacao {
+      position: absolute;
+      bottom: 80px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 270px;
+      z-index: 2;
+    }
+
+    .botao-circular {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      border: none;
+      position: relative;
+      padding: 0;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+      transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease;
+      user-select: none;
+      color: white;
+      font-size: 0; /* esconde texto padrão */
+    }
+
+    .botao-esquerda {
+      background: linear-gradient(145deg, #f08334, #c05a0c);
+      box-shadow: 0 6px 12px #c05a0c;
+    }
+
+    .botao-esquerda:hover {
+      transform: scale(1.1);
+      box-shadow: 0 10px 25px #c05a0c;
+      filter: brightness(1.1);
+    }
+
+    .botao-esquerda:active {
+      transform: scale(0.95);
+      box-shadow: 0 4px 8px #c05a0c;
+      filter: brightness(0.9);
+    }
+
+    .botao-direita {
+      background: linear-gradient(145deg, #7fbc4d, #4e7430);
+      box-shadow: 0 6px 12px #4e7430;
+    }
+
+    .botao-direita:hover {
+      transform: scale(1.1);
+      box-shadow: 0 10px 25px #4e7430;
+      filter: brightness(1.1);
+    }
+
+    .botao-direita:active {
+      transform: scale(0.95);
+      box-shadow: 0 4px 8px #4e7430;
+      filter: brightness(0.9);
+    }
+
+    /* Triângulos das setas */
+    .triangulo {
+      width: 0;
+      height: 0;
+      border-style: solid;
+      display: block;
+    }
+
+    .triangulo-esquerda {
+      border-width: 37px 74px 37px 0;
+      border-color: transparent white transparent transparent;
+    }
+
+    .triangulo-direita {
+      border-width: 37px 0 37px 74px;
+      border-color: transparent transparent transparent white;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Imagens de fundo decorativas -->
+    <img src="/static/Imagens/Group%202.png" class="imagem-superior-esquerda" alt="Fundo superior esquerdo" />
+    <img src="/static/Imagens/Group%203.png" class="imagem-inferior-direita" alt="Fundo inferior direito" />
+
+    <!-- Cabeçalho -->
+    <div class="header">
+      <h2>ACESSE OS PROJETOS</h2>
+    </div>
+
+    <!-- Retângulo maior (esquerdo) -->
+    <div class="retangulo-esquerda">
+      <ul>
+        {% for projeto in projetos %}
+          <li>{{ projeto }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <!-- Retângulo menor (direito) -->
+    <div class="retangulo-direita">
+      <form method="POST" action="/registrar_acesso">
+        <ul>
+          {% for recurso in recursos %}
+            <li>
+              {{ recurso['descRecurso'] }}
+              <button type="submit" name="id_alocacao" value="{{ recurso['idUsuarioXProjetoXRecurso'] }}">
+                Acessar
+              </button>
+            </li>
+          {% endfor %}
+        </ul>
+      </form>
+    </div>
+
+    <!-- Conexão SVG -->
+    <svg class="linha-conexao" width="1024" height="1440">
+      <polyline points="492,399 720,399 720,493" fill="none" stroke="#000" stroke-width="4" />
+      <circle cx="720" cy="493" r="16" fill="#000" />
+    </svg>
+
+    <!-- Botões -->
+    <div class="botoes-navegacao">
+      <button class="botao-circular botao-esquerda" aria-label="Botão anterior">
+        <div class="triangulo-wrapper">
+          <div class="triangulo triangulo-esquerda"></div>
+        </div>
+      </button>
+      <button class="botao-circular botao-direita" aria-label="Botão próximo">
+        <div class="triangulo-wrapper">
+          <div class="triangulo triangulo-direita"></div>
+        </div>
+      </button>
+    </div>
+  </div>
+</body>
+</html>
